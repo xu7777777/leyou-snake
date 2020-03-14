@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leyou.mapper.TbBrandMapper">
+
+    <select id="pageList" resultType="com.leyou.entity.dto.TbBrand">
+        select b.* from tb_brand b
+        <where>
+            <if test="idOrTitle != null and idOrTitle != ''">
+                AND (b.id like CONCAT('%',#{idOrTitle},'%') or b.name like CONCAT('%',#{idOrTitle},'%'))
+            </if>
+        </where>
+        <if test="desc == null or desc == 'false'">
+            order by b.letter asc
+        </if>
+        <if test="desc == 'true'">
+            order by b.letter desc
+        </if>
+
+    </select>
+
+</mapper>
