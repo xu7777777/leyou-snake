@@ -2,52 +2,67 @@ package com.leyou.entity.dto;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-
 /**
  * <p>
- * 商品类目表，类目和商品(spu)是一对多关系，类目与品牌是多对多关系
+ * 
  * </p>
  *
  * @author generator
- * @since 2020-03-14
+ * @since 2020-03-16
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class TbCategory implements Serializable {
+public class TbOpUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 类目id
+     * id
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 类目名称
+     * 管理员权限角色
+     */
+    private Integer roles;
+
+    /**
+     * 管理员账户名
      */
     private String name;
 
     /**
-     * 父类目id,顶级类目填0
+     * 管理员密码
      */
-    private Long parentId;
+    private String password;
+
 
     /**
-     * 是否为父节点，0为否，1为是
+     * 管理员头像
      */
-    private Boolean isParent;
+    private String avatar;
 
     /**
-     * 排序指数，越小越靠前
+     * 管理员介绍，例如对权限的介绍
      */
-    private Integer sort;
+    private String introduction;
+
+    /**
+     * token
+     */
+    private String token;
+
+    /**
+     * 真实姓名
+     */
+    private String realName;
 
 
 }

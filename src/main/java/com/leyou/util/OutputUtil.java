@@ -8,7 +8,7 @@ public class OutputUtil {
     //成功
     public static <K> Output<K> ok(K data) {
         Output<K> output = new Output<>();
-        output.setCode(0);
+        output.setCode(200);
         output.setMsg("");
         output.setData(data);
         return output;
@@ -25,7 +25,7 @@ public class OutputUtil {
 
     //是否成功
     public static boolean isOk(int code) {
-        if (code == 0) {
+        if (code == 200) {
             return true;
         } else {
             return false;

@@ -4,7 +4,7 @@ appName: leyou
 server:
   max-http-header-size: 1000000
   servlet:
-    context-path: /api
+    context-path: /dev-api
   threads: 4
   tomcat:
     acceptCountg: 20
