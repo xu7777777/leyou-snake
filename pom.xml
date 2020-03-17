@@ -147,6 +147,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!--fdfs-->
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+            <version>1.26.1-RELEASE</version>
+        </dependency>
     </dependencies>
 
     <!-- Package as an executable jar -->

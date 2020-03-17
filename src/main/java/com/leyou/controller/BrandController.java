@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * @since 2020-03-14
  */
 @RestController
-@RequestMapping("/brand")
+@RequestMapping("/brands")
 public class BrandController {
 
     @Resource

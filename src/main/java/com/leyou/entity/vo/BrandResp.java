@@ -32,5 +32,10 @@ public class BrandResp {
      */
     private String letter;
 
+    /**
+     * 品牌热度
+     */
+    private Long heat;
+
 
 }

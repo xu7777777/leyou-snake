@@ -22,7 +22,7 @@ public class CodeGenerator {
 //    static String[] tables = {"tb_brand","tb_category","tb_category_brand","tb_order","tb_order_detail","tb_order_status",
 //            "tb_pay_log","tb_sku","tb_spec_group","tb_spec_param","tb_spu","tb_spu_detail","tb_stock","tb_user"};
 
-    static String[] tables = {"tb_op_user"};
+    static String[] tables = {"tb_heat"};
 
     public static void main(String[] args) throws Exception {
         for (String table : tables) {

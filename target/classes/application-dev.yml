@@ -41,3 +41,11 @@ spring:
     port: 6379
   resources:
     static-locations: classpath:/public/,classpath:/static/
+fdfs:
+  so-timeout: 1501 # 超时时间
+  connect-timeout: 601 # 连接超时时间
+  thumb-image: # 缩略图
+    width: 50
+    height: 50
+  tracker-list: # tracker地址：你的虚拟机服务器地址+端口（默认是22122）
+  - 106.54.86.212:22122
