@@ -15,5 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface TbBrandMapper extends BaseMapper<TbBrand> {
 
-    IPage<TbBrand> pageList(Page<TbBrand> tbBrandPage, String idOrTitle, String desc, String sortBy);
+    IPage<TbBrand> pageList(Page<TbBrand> tbBrandPage, String idOrTitle);
 }

@@ -2,10 +2,7 @@ package com.leyou.service;
 
 import com.leyou.entity.dto.TbBrand;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.leyou.entity.vo.BrandResp;
-import com.leyou.entity.vo.Output;
-import com.leyou.entity.vo.PageData;
-import com.leyou.entity.vo.PageParams;
+import com.leyou.entity.vo.*;
 
 /**
  * <p>
@@ -18,4 +15,10 @@ import com.leyou.entity.vo.PageParams;
 public interface ITbBrandService extends IService<TbBrand> {
 
     Output<PageData<BrandResp>> pageList(PageParams pageParams);
+
+    Long add(BrandReq brandReq);
+
+    Boolean del(Long bid);
+
+    boolean updateBrand(BrandReq brandReq);
 }

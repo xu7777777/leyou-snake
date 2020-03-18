@@ -9,13 +9,7 @@
                 AND (b.id like CONCAT('%',#{idOrTitle},'%') or b.name like CONCAT('%',#{idOrTitle},'%'))
             </if>
         </where>
-        <if test="desc == null or desc == 'false'">
-            order by b.letter asc
-        </if>
-        <if test="desc == 'true'">
-            order by b.letter desc
-        </if>
-
+        order by b.id asc
     </select>
 
 </mapper>

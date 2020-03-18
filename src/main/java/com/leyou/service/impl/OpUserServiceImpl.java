@@ -20,7 +20,7 @@ import javax.annotation.Resource;
  * @since 2020-03-16
  */
 @Service
-public class TbOpUserServiceImpl extends ServiceImpl<TbOpUserMapper, TbOpUser> implements ITbOpUserService {
+public class OpUserServiceImpl extends ServiceImpl<TbOpUserMapper, TbOpUser> implements ITbOpUserService {
 
     @Resource
     private RedisUtil redisUtil;

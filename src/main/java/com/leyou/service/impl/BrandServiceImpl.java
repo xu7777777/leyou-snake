@@ -8,10 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.leyou.entity.dto.TbBrand;
 import com.leyou.entity.dto.TbHeat;
 import com.leyou.entity.enums.HeatTypeEnums;
-import com.leyou.entity.vo.BrandResp;
-import com.leyou.entity.vo.Output;
-import com.leyou.entity.vo.PageData;
-import com.leyou.entity.vo.PageParams;
+import com.leyou.entity.vo.*;
 import com.leyou.mapper.TbBrandMapper;
 import com.leyou.service.ITbBrandService;
 import com.leyou.service.ITbHeatService;
@@ -19,6 +16,7 @@ import com.leyou.util.OutputUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -40,6 +38,9 @@ public class BrandServiceImpl extends ServiceImpl<TbBrandMapper, TbBrand> implem
     @Resource
     private ITbHeatService heatService;
 
+    @Resource
+    private ITbBrandService brandService;
+
     /**
      * return all brands or the brands which eet the conditions
      * @param pageParams pageSize pageNum conditions(title, id)
@@ -54,15 +55,13 @@ public class BrandServiceImpl extends ServiceImpl<TbBrandMapper, TbBrand> implem
         }
         //get brands from DB
         IPage<TbBrand> brandPage = this.baseMapper.pageList(new Page<>(pageParams.getCurrent(), pageParams.getSize()),
-                jsonObject.getObject("idOrTitle", String.class),
-                jsonObject.getObject("desc", String.class),
-                jsonObject.getObject("sortBy", String.class));
+                jsonObject.getObject("idOrTitle", String.class));
 
         //search heat
         List<Long> brandIds = brandPage.getRecords().stream().map(TbBrand::getId).collect(Collectors.toList());
         QueryWrapper<TbHeat> heatQW = new QueryWrapper<>();
         heatQW.eq("entity_type", HeatTypeEnums.BRAND.getCode()).in("entity_id", brandIds);
-        List<TbHeat> heats = heatService.list(heatQW);
+        List<TbHeat> heats = this.heatService.list(heatQW);
         Map<Long, TbHeat> heatMaps = heats.stream().collect(Collectors.toMap(TbHeat::getEntityId, o -> o));
 
         //copy properties
@@ -70,6 +69,7 @@ public class BrandServiceImpl extends ServiceImpl<TbBrandMapper, TbBrand> implem
         for (TbBrand brand : brandPage.getRecords()){
             BrandResp brandResp = new BrandResp();
             brandResp.setHeat(heatMaps.get(brand.getId()).getHot());
+            brandResp.setBrandId(brand.getId());
             BeanUtils.copyProperties(brand, brandResp);
 
             brandResps.add(brandResp);
@@ -82,5 +82,43 @@ public class BrandServiceImpl extends ServiceImpl<TbBrandMapper, TbBrand> implem
         pageData.setTotalCount(brandPage.getTotal());
 
         return OutputUtil.ok(pageData);
+    }
+
+    @Override
+    @Transactional
+    public Long add(BrandReq brandReq) {
+        TbBrand brand = new TbBrand();
+        BeanUtils.copyProperties(brandReq, brand);
+        this.brandService.save(brand);
+
+        // add heat
+        TbHeat heat = new TbHeat();
+        heat.setEntityId(brand.getId());
+        heat.setEntityType(HeatTypeEnums.BRAND.getCode());
+        this.heatService.save(heat);
+
+        return brand.getId();
+    }
+
+    @Override
+    @Transactional
+    public Boolean del(Long bid) {
+        this.brandService.removeById(bid);
+
+        QueryWrapper<TbHeat> delHeatQW = new QueryWrapper<>();
+        delHeatQW.eq("entity_type", HeatTypeEnums.BRAND.getCode()).
+                eq("entity_id", bid);
+        this.heatService.remove(delHeatQW);
+
+        return true;
+    }
+
+    @Override
+    public boolean updateBrand(BrandReq brandReq) {
+        TbBrand brand = new TbBrand();
+        BeanUtils.copyProperties(brandReq, brand);
+        brand.setId(brandReq.getBrandId());
+
+        return this.brandService.updateById(brand);
     }
 }
