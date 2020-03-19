@@ -19,8 +19,8 @@ public enum ErrorEnum {
     // goods
     GOODS_NOT_EXIST(900, "商品不存在"),
 
-    // store
-    STORE_NOT_EXIST(1100, "门店不存在"),
+    // category
+    CATEGORY_DELETE_FAILE(1100, "删除类目失败，在删除该类目前请先删除其子类！"),
 
     // store server
     STORE_SERVER_NOT_EXIST(1200, "美容师不存在"),

@@ -32,7 +32,7 @@ public class TbCategory implements Serializable {
     /**
      * 类目名称
      */
-    private String name;
+    private String label;
 
     /**
      * 父类目id,顶级类目填0

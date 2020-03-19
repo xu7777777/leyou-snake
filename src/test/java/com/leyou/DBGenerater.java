@@ -40,21 +40,23 @@ public class DBGenerater {
     /**
      * add info for table heat
      */
-//    @Test
-//    public void generateHeat(){
-////        List<TbBrand> allBrands = brandService.list();
-////        List<Long> allBrandIds = allBrands.stream().map(TbBrand::getId).collect(Collectors.toList());
+    @Test
+    public void generateHeat(){
+        List<TbBrand> allBrands = brandService.list();
+        List<Long> allBrandIds = allBrands.stream().map(TbBrand::getId).collect(Collectors.toList());
 //        List<TbHeat> heats = heatService.list();
-//
-////        Random random = new Random();
-//        for (TbHeat heat : heats){
-////            TbHeat heat = new TbHeat();
-////            heat.setEntityId(id);
-////            heat.setHot((random.nextInt(1000000) + 1L));
+        List<TbHeat> heats = new ArrayList<>();
+
+        Random random = new Random();
+        for (Long id : allBrandIds){
+            TbHeat heat = new TbHeat();
+            heat.setEntityId(id);
+            heat.setHot((random.nextInt(1000000) + 1L));
+            heat.setEntityType(HeatTypeEnums.BRAND.getCode());
 //            heat.setEntityType(HeatTypeEnums.BRAND.getCode());
-//
-////            heats.add(heat);
-//        }
-//        heatService.saveOrUpdateBatch(heats);
-//    }
+
+            heats.add(heat);
+        }
+        heatService.saveOrUpdateBatch(heats);
+    }
 }
