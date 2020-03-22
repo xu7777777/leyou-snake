@@ -3,6 +3,7 @@ package com.leyou.entity.vo;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 /**
  * @author xu7777777
@@ -19,13 +20,18 @@ public class BrandReq {
     /**
      * 品牌名称
      */
-    @NotBlank(message = "Please input the brand's name")
+    @NotBlank(message = "  品牌名称不能为空！")
     private String name;
 
     /**
      * 品牌图片
      */
-    @NotBlank(message = "Please upload the image of brand")
+    @NotBlank(message = "  请上传该品牌图片！")
     private String image;
+
+    /**
+     * 类目id
+     */
+    private List<Long> ids;
 
 }

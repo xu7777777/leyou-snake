@@ -3,6 +3,7 @@ package com.leyou.entity.vo;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 /**
  * @author xu7777777
@@ -30,5 +31,6 @@ public class CategoryReq {
      * 是否为父节点，0为否，1为是
      */
     private Boolean isParent;
+
 
 }

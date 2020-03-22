@@ -23,9 +23,14 @@ public class TbCategoryBrand implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     * id
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
+
+    /**
      * 商品类目id
      */
-    @TableId(value = "category_id", type = IdType.UUID)
     private Long categoryId;
 
     /**

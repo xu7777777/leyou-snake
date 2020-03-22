@@ -21,6 +21,11 @@ public enum ErrorEnum {
 
     // category
     CATEGORY_DELETE_FAILE(1100, "删除类目失败，在删除该类目前请先删除其子类！"),
+    GET_CATEGORY_FAILE(1101, "抱歉！获取类目失败。"),
+
+    // brand
+    BRAND_NOT_EXIST(1300, "抱歉，该品牌不存在！"),
+    GET_BRAND_ERROR(1301, "获取图表信息失败，请检查检索条件是否有误！"),
 
     // store server
     STORE_SERVER_NOT_EXIST(1200, "美容师不存在"),

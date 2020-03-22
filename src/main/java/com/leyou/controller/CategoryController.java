@@ -4,10 +4,12 @@ package com.leyou.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.leyou.entity.dto.TbCategory;
+import com.leyou.entity.dto.TbCategoryBrand;
 import com.leyou.entity.enums.ErrorEnum;
 import com.leyou.entity.vo.CategoryReq;
 import com.leyou.entity.vo.CategoryResp;
 import com.leyou.entity.vo.Output;
+import com.leyou.service.ITbCategoryBrandService;
 import com.leyou.service.ITbCategoryService;
 import com.leyou.util.OutputUtil;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +20,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -30,6 +33,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
+
+    @Resource
+    private ITbCategoryBrandService categoryBrandService;
 
     @Resource
     private ITbCategoryService categoryService;
@@ -130,6 +136,56 @@ public class CategoryController {
         } else {
             return OutputUtil.fail(ErrorEnum.OPERATION_FAILED.getCode(), ErrorEnum.OPERATION_FAILED.getMsg());
         }
+    }
+
+    /**
+     * get category by categoryId
+     * @param cid categoryId
+     * @return categoryResp
+     */
+    @RequestMapping("/get/{cid}")
+    public Output<CategoryResp> getCategoryById(@PathVariable(value = "cid", required = false) String cid) {
+        if ("undefined".equals(cid.trim())) {
+            return OutputUtil.ok(null);
+        }
+        TbCategory category = this.categoryService.getById(cid.trim());
+        CategoryResp categoryResp = new CategoryResp();
+
+        BeanUtils.copyProperties(category, categoryResp);
+
+        return OutputUtil.ok(categoryResp);
+    }
+
+
+    /**
+     * get categories by brandId
+     * @param bid brandId
+     * @return categories
+     */
+    @RequestMapping("/categories/{bid}")
+    public Output<List<CategoryResp>> getCategoryByBrandId(@PathVariable("bid") Long bid) {
+        QueryWrapper<TbCategoryBrand> categoryBrandQW = new QueryWrapper<>();
+        categoryBrandQW.eq("brand_id", bid);
+        List<TbCategoryBrand> categoryBrands = categoryBrandService.list(categoryBrandQW);
+
+        if (categoryBrands == null || categoryBrands.size() == 0) {
+            return OutputUtil.ok(null);
+        }
+
+        List<Long> categoryIds = categoryBrands.stream().map(TbCategoryBrand::getCategoryId).collect(Collectors.toList());
+        QueryWrapper<TbCategory> categoryQW = new QueryWrapper<>();
+        categoryQW.in("id", categoryIds);
+        List<TbCategory> categories = categoryService.list(categoryQW);
+
+        List<CategoryResp> categoryResps = new ArrayList<>();
+        for (TbCategory category : categories) {
+            CategoryResp categoryResp = new CategoryResp();
+            BeanUtils.copyProperties(category, categoryResp);
+
+            categoryResps.add(categoryResp);
+        }
+
+        return OutputUtil.ok(categoryResps);
     }
 
 }
