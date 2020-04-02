@@ -46,7 +46,7 @@ public class OpUserController {
         TbOpUser isExistOpUser = this.opUserService.getOne(opUserQw);
         // username is not exist
         if (isExistOpUser == null){
-            OutputUtil.fail(ErrorEnum.USER_NOT_EXIST.getCode(), ErrorEnum.USER_NOT_EXIST.getMsg());
+            return OutputUtil.fail(ErrorEnum.USER_NOT_EXIST.getCode(), ErrorEnum.USER_NOT_EXIST.getMsg());
         }
 
         String pwdMd5 = DigestUtils.md5DigestAsHex(loginParam.getPassword().getBytes());

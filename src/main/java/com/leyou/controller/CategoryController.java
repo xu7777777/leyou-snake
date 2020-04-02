@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.leyou.entity.dto.TbCategory;
 import com.leyou.entity.dto.TbCategoryBrand;
 import com.leyou.entity.enums.ErrorEnum;
+import com.leyou.entity.vo.BrandResp;
 import com.leyou.entity.vo.CategoryReq;
 import com.leyou.entity.vo.CategoryResp;
 import com.leyou.entity.vo.Output;
@@ -98,18 +99,18 @@ public class CategoryController {
 
     /**
      * delete category
+     *
      * @param cid categoryId
      * @return message
      */
     @RequestMapping("del/{cid}")
     public Output<String> del(@PathVariable("cid") Long cid) {
-        System.out.println("============= "+cid);
         // better to add ASD
         QueryWrapper<TbCategory> canDelCategoryQW = new QueryWrapper<>();
         canDelCategoryQW.eq("parent_id", cid);
         List<TbCategory> canDelCategorys = categoryService.list(canDelCategoryQW);
 
-        if (canDelCategorys != null && canDelCategorys.size() > 0){
+        if (canDelCategorys != null && canDelCategorys.size() > 0) {
             return OutputUtil.fail(ErrorEnum.CATEGORY_DELETE_FAILE.getCode(), ErrorEnum.CATEGORY_DELETE_FAILE.getMsg());
         }
 
@@ -122,11 +123,12 @@ public class CategoryController {
 
     /**
      * update category
+     *
      * @param categoryReq categoryReq
      * @return message
      */
     @PostMapping("update")
-    public Output<String> update(@Valid  CategoryReq categoryReq) {
+    public Output<String> update(@Valid CategoryReq categoryReq) {
         TbCategory category = new TbCategory();
         BeanUtils.copyProperties(categoryReq, category);
         category.setId(categoryReq.getCategoryId());
@@ -140,6 +142,7 @@ public class CategoryController {
 
     /**
      * get category by categoryId
+     *
      * @param cid categoryId
      * @return categoryResp
      */
@@ -159,6 +162,7 @@ public class CategoryController {
 
     /**
      * get categories by brandId
+     *
      * @param bid brandId
      * @return categories
      */
