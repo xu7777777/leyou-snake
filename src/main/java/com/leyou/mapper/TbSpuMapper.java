@@ -1,5 +1,7 @@
 package com.leyou.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.leyou.entity.dto.TbSpu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface TbSpuMapper extends BaseMapper<TbSpu> {
 
+    IPage<TbSpu> pageList(Page<TbSpu> tbSpuPage, String saleable, String idOrTitle, String brandName, String categoryName);
 }

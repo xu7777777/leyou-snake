@@ -5,13 +5,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.leyou.entity.dto.TbCategory;
 import com.leyou.entity.dto.TbCategoryBrand;
+import com.leyou.entity.dto.TbSpecParam;
 import com.leyou.entity.enums.ErrorEnum;
-import com.leyou.entity.vo.BrandResp;
-import com.leyou.entity.vo.CategoryReq;
-import com.leyou.entity.vo.CategoryResp;
-import com.leyou.entity.vo.Output;
+import com.leyou.entity.enums.GenericTypeEnums;
+import com.leyou.entity.vo.*;
 import com.leyou.service.ITbCategoryBrandService;
 import com.leyou.service.ITbCategoryService;
+import com.leyou.service.ITbSpecParamService;
 import com.leyou.util.OutputUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +40,9 @@ public class CategoryController {
 
     @Resource
     private ITbCategoryService categoryService;
+
+    @Resource
+    private ITbSpecParamService specParamService;
 
     /**
      * Get child classification based on parent classification id
@@ -192,4 +195,25 @@ public class CategoryController {
         return OutputUtil.ok(categoryResps);
     }
 
+    /**
+     * get specparams by categoryId
+     * @param cid categoryId
+     * @return specParams
+     */
+    @RequestMapping("params")
+    public Output<List<SpecParamResp>>getParams(@RequestParam("cid") Long cid, @RequestParam("isGeneric") Boolean isGeneric) {
+        QueryWrapper<TbSpecParam> specParamQw = new QueryWrapper<>();
+        specParamQw.eq("cid", cid).eq("generic", isGeneric);
+        List<TbSpecParam> specParams = specParamService.list(specParamQw);
+
+        List<SpecParamResp> specParamResps = new ArrayList<>();
+        for (TbSpecParam specParam : specParams) {
+            SpecParamResp specParamResp = new SpecParamResp();
+            BeanUtils.copyProperties(specParam, specParamResp);
+
+            specParamResps.add(specParamResp);
+        }
+
+        return OutputUtil.ok(specParamResps);
+    }
 }

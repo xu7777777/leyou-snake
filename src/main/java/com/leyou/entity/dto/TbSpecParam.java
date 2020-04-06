@@ -43,7 +43,7 @@ public class TbSpecParam implements Serializable {
     /**
      * 是否是数字类型参数，true或false
      */
-    private Boolean numeric;
+    private Boolean paramNumeric;
 
     /**
      * 数字类型参数的单位，非数字类型可以为空
@@ -64,6 +64,7 @@ public class TbSpecParam implements Serializable {
      * 数值类型参数，如果需要搜索，则添加分段间隔值，如CPU频率间隔：0.5-1.0
      */
     private String segments;
+
 
 
 }

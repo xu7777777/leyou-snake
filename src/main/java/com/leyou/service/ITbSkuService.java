@@ -2,6 +2,8 @@ package com.leyou.service;
 
 import com.leyou.entity.dto.TbSku;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.leyou.entity.vo.ProductReq;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ITbSkuService extends IService<TbSku> {
 
+    Boolean add(ProductReq productReq);
 }

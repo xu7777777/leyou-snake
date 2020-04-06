@@ -1,9 +1,18 @@
 package com.leyou.controller;
 
 
+import com.leyou.entity.vo.Output;
+import com.leyou.entity.vo.ProductReq;
+import com.leyou.service.ITbSkuService;
+import com.leyou.util.OutputUtil;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
 
 /**
  * <p>
@@ -14,7 +23,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-03-14
  */
 @RestController
-@RequestMapping("/tbSku")
+@RequestMapping("/product")
 public class SkuController {
+
+    @Resource
+    private ITbSkuService skuService;
+
+    @PostMapping("add")
+    public Output add(@Valid ProductReq productReq) {
+        skuService.add(productReq);
+        return OutputUtil.ok(null);
+    }
 
 }

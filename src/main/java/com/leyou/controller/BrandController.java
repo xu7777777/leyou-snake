@@ -59,8 +59,6 @@ public class BrandController {
      */
     @PostMapping("add")
     public Output<Long> add(@Valid BrandReq brandReq) {
-        System.out.println(" ------- "+ brandReq);
-
         Long brandId = brandService.add(brandReq);
         if (brandId != null) {
             return OutputUtil.ok(brandId);

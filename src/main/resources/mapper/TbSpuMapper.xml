@@ -2,4 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.leyou.mapper.TbSpuMapper">
 
+    <select id="pageList" resultType="com.leyou.entity.dto.TbSpu">
+        select s.* from tb_spu s
+        inner join tb_brand b on s.brand_id = b.id
+        inner join tb_category c on s.cid3 = c.id
+        <where>
+            <if test="saleable != null and saleable != ''">
+                AND (s.saleable = #{saleable})
+            </if>
+            <if test="idOrTitle != null and idOrTitle != ''">
+                AND (s.id like CONCAT('%',#{idOrTitle},'%') or s.title like CONCAT('%',#{idOrTitle},'%'))
+            </if>
+            <if test="brandName != null and brandName != ''">
+                AND (b.name like CONCAT('%',#{brandName},'%'))
+            </if>
+            <if test="categoryName != null and categoryName != ''">
+                AND (c.label like CONCAT('%',#{categoryName},'%'))
+            </if>
+        </where>
+        order by s.id asc
+    </select>
+
 </mapper>

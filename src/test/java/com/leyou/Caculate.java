@@ -1,9 +1,13 @@
 package com.leyou;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author xu7777777
@@ -13,20 +17,18 @@ public class Caculate {
 
     @Test
     public void fun() {
-        List<Long> list01 = new ArrayList<>();
-        list01.add(0L);
-        list01.add(-1L);
-        list01.add(1L);
-        list01.add(65535L);
-        list01.add(65534L);
-        list01.add(65536L);
+        Map<Long, String> map = new HashMap<>();
+        map.put(10L, "1213");
+        map.put(11L, "113");
 
-        for (Long num01 : list01) {
-            for (Long num02 : list01) {
-                    System.out.println(num01 + " / " + num02 + "       应等于    " + (num01 / num02));
+        String str = "{'10':'1212', '11':'1123'}";
 
-            }
-        }
+        Map x = JSONObject.parseObject(str, Map.class);
+        System.out.println(x.get("10"));
+
+
+
+        System.out.println(JSONObject.toJSONString(map));
     }
 
 }

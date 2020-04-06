@@ -60,9 +60,9 @@ public class TbSpu implements Serializable {
     private Long brandId;
 
     /**
-     * 是否上架，0下架，1上架
+     * 是否上架，-1下架，1上架
      */
-    private Boolean saleable;
+    private Integer saleable;
 
     /**
      * 是否有效，0已删除，1有效

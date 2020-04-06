@@ -36,9 +36,9 @@ public class UploadUtils {
      */
     public String uploadImage(MultipartFile file) {
 
-        //校验文件类型
+        // 校验文件类型
         String originalFilename = file.getOriginalFilename();
-//        StringUtils.substringAfterLast(originalFilename, ".");
+        // StringUtils.substringAfterLast(originalFilename, ".");
         String contentType = file.getContentType();
         if (!CONTENT_TYPES.contains(contentType)) {
             LOGGER.info("================文件类型不合法============: {}", originalFilename);
@@ -52,7 +52,7 @@ public class UploadUtils {
             }
 
             //保存到服务器
-//            file.transferTo(new File("E:\\JavaProgram\\131\\resource\\image\\" + originalFilename));
+            //file.transferTo(new File("E:\\JavaProgram\\131\\resource\\image\\" + originalFilename));
             String ext = StringUtils.substringAfterLast(originalFilename, ".");
             System.out.println("---------------+++");
             StorePath storePath = this.storageClient.uploadFile(file.getInputStream(), file.getSize(), ext, null);

@@ -2,6 +2,10 @@ package com.leyou.service;
 
 import com.leyou.entity.dto.TbSpu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.leyou.entity.vo.GoodsResp;
+import com.leyou.entity.vo.Output;
+import com.leyou.entity.vo.PageData;
+import com.leyou.entity.vo.PageParams;
 
 /**
  * <p>
@@ -13,4 +17,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ITbSpuService extends IService<TbSpu> {
 
+    Output<PageData<GoodsResp>> pageList(PageParams pageParams);
 }
