@@ -18,6 +18,10 @@ public enum ErrorEnum {
 
     // goods
     GOODS_NOT_EXIST(900, "商品不存在"),
+    GOODS_ADD_FAILE(901, "商品添加失败"),
+    PRODUCT_ADD_FAILE(920, "产品添加失败"),
+    PRODUCT_MOD_FAILE(921, "产品修改失败"),
+    PRODUCT_DEL_FAILE(922, "产品删除失败"),
 
     // category
     CATEGORY_DELETE_FAILE(1100, "删除类目失败，在删除该类目前请先删除其子类！"),

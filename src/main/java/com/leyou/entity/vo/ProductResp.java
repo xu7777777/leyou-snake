@@ -2,6 +2,8 @@ package com.leyou.entity.vo;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ProductResp {
     private Long id;
@@ -19,7 +21,7 @@ public class ProductResp {
     /**
      * 商品的图片，多个图片以‘,’分割
      */
-    private String images;
+    private List<ImageVo> images;
 
     /**
      * 销售价格，单位为分
@@ -34,11 +36,11 @@ public class ProductResp {
     /**
      * sku的特有规格参数键值对，json格式，反序列化时请使用linkedHashMap，保证有序
      */
-    private String ownSpec;
+    private List<ProductParams> ownSpec;
 
     /**
      * 是否有效，0无效，1有效
      */
-    private Boolean enable;
+    private String enable;
 
 }

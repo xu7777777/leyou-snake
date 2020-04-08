@@ -16,13 +16,12 @@ public class ProductReq {
     /**
      * spu id
      */
-    @NotNull(message = "商品异常，请重试！")
     private Long goodsId;
 
     /**
      * 商品标题
      */
-    @NotBlank(message = "请输入商品名称！")
+    @NotBlank(message = "请输入正确的商品名称！")
     private String title;
 
     /**
@@ -33,12 +32,17 @@ public class ProductReq {
     /**
      * 销售价格，单位为分
      */
-    @NotNull(message = "请给出售价！")
+    @NotNull(message = "请给出正确的售价！")
     private Long price;
 
     /**
      * 参数列表
      */
     private String ownSpec;
+
+    /**
+     * 是否上架
+     */
+    private Integer enable;
 
 }

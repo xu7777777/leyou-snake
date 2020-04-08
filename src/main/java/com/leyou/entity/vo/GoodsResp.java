@@ -22,6 +22,11 @@ public class GoodsResp {
     private String subTitle;
 
     /**
+     * cid3
+     */
+    private Long cid;
+
+    /**
      * 类别名称
      */
     private String categoryName;

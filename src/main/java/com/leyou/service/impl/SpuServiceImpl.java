@@ -92,6 +92,7 @@ public class SpuServiceImpl extends ServiceImpl<TbSpuMapper, TbSpu> implements I
             String categoryName = categoriesMap.get(spu.getCid3()).getLabel();
             BeanUtils.copyProperties(spu, goodsResp);
             BeanUtils.copyProperties(spuDetailsMap.get(spu.getId()), goodsResp);
+            goodsResp.setCid(spu.getCid3());
             goodsResp.setBrandName(brandName);
             goodsResp.setCategoryName(categoryName);
 

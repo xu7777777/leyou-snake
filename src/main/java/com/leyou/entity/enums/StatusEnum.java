@@ -18,11 +18,11 @@ public enum StatusEnum {
         this.msg = msg;
     }
 
-    public static Map<Integer, GenericTypeEnums> map = new HashMap<>();
+    public static Map<Integer, StatusEnum> map = new HashMap<>();
 
     static {
-        GenericTypeEnums[] values = GenericTypeEnums.values();
-        for (GenericTypeEnums value : values) {
+        StatusEnum[] values = StatusEnum.values();
+        for (StatusEnum value : values) {
             map.put(value.getCode(), value);
         }
     }
